@@ -23,6 +23,7 @@ const TodoList: React.FC = () => {
     handleToggleComplete,
     setOpen
   } = useTodoActions();
+
 	const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
 
@@ -80,7 +81,9 @@ const TodoList: React.FC = () => {
         ))}
         </List>
       )}
-			<TodoForm todo={editingTodo} onClose={closeTodo} open={open} />
+			{(editingTodo ||  open) &&(
+        <TodoForm todo={editingTodo} onClose={closeTodo} open={open} />
+      )}
 			<Fab color="primary" onClick={() => handleTodoAction('add')} sx={{
         position: 'absolute',
         right: '0',
