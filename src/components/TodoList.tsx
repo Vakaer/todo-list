@@ -1,8 +1,11 @@
-import { List, TextField, Typography } from '@mui/material';
+import { List, TextField, Typography, Fab } from '@mui/material';
 import React from 'react';
 import { useTodoActions } from '../hooks/useTodoActions';
 import { Todo } from '../types/types';
 import TodoItem from './TodoItem';
+import TodoForm from './TodoForm';
+
+import AddIcon from '@mui/icons-material/Add';
 
 const TodoList: React.FC = () => {
   const {
@@ -11,7 +14,10 @@ const TodoList: React.FC = () => {
     error,
     searchTerm,
     setSearchTerm,
+    editingTodo,
+    open,
     editTodo,
+    closeTodo,
     handleDelete,
     handleToggleComplete,
     setOpen
@@ -58,6 +64,14 @@ const TodoList: React.FC = () => {
         ))}
         </List>
       )}
+			<TodoForm todo={editingTodo} onClose={closeTodo} open={open} />
+			<Fab color="primary" onClick={() => handleTodoAction('add')} sx={{
+        position: 'absolute',
+        right: '0',
+        marginTop: '4rem'
+      }}>
+        <AddIcon />
+      </Fab>
     </div>
   );
 };
